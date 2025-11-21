@@ -1,0 +1,7 @@
+# Rendered manifests
+**/rendered/
+**/rendered-all.yaml
+
+# Environment files with secrets
+.env
+**/.env

@@ -1,0 +1,13 @@
+repositories:
+- name: ghcr
+  url: ghcr.io
+  oci: true
+
+kubeVersion: v1.34
+
+releases:
+- name: kagent-crds
+  chart: ghcr/kagent-dev/kagent/helm/kagent-crds
+  version: 0.7.4
+  namespace: kagent
+  createNamespace: true

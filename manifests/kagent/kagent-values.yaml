@@ -1,0 +1,10 @@
+providers:
+  default: openAI
+  openAI:
+    provider: OpenAI
+    # https://platform.openai.com/docs/pricing
+    model: "gpt-5-mini"
+    apiKeySecretRef: kagent-secrets
+    apiKeySecretKey: OPENAI_API_KEY
+
+# See https://github.com/kagent-dev/kagent/blob/main/helm/kagent/values.yaml for full configuration options.

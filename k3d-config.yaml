@@ -1,0 +1,21 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: kagent-demo
+servers: 1
+agents: 1
+image: rancher/k3s:v1.34.1-k3s1
+# Sets up port forwarding from host to loadbalancer
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer
+# options:
+#   k3s:
+#     extraArgs:
+#       - arg: --disable=traefik
+#         nodeFilters:
+#           - server:*
