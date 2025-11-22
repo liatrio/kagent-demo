@@ -8,7 +8,7 @@ This repository demonstrates [Kagent](https://kagent.dev/) running on a local Ku
 
 - [Task](https://taskfile.dev/) - Task runner
 - [k3d](https://k3d.io/) - Tool to run k3s in Docker
-- [helmfile](https://helmfile.readthedocs.io/en/latest/) - Declarative management of Helm charts
+- [Docker](https://www.docker.com/) - Container runtime (helmfile is run via container)
 
 ### Setup
 

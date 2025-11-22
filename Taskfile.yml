@@ -1,5 +1,10 @@
 version: '3'
 
+vars:
+  HELMFILE_VERSION: v1.2.0
+  BASE_DIR: $(pwd)
+  HELMFILE_CMD: docker run --rm --net=host -v ${HOME}/.kube:/helm/.kube -v ${HOME}/.config/helm:/helm/.config/helm -v {{.BASE_DIR}}:/workdir -w /workdir ghcr.io/helmfile/helmfile:{{.HELMFILE_VERSION}}
+
 tasks:
 #region Up Tasks
   create-cluster:
@@ -30,7 +35,7 @@ tasks:
       - |
         find ./manifests -name helmfile.yaml -type f -exec dirname {} \; | while read dir; do
           mkdir -p "$dir/rendered"
-          (cd "$dir" && helmfile template > rendered/rendered-all.yaml)
+          (cd "$dir" && {{.HELMFILE_CMD}} helmfile template > rendered/rendered-all.yaml)
         done
 
   render-crds:
@@ -42,7 +47,7 @@ tasks:
         find ./manifests -name crd-helmfile.yaml -type f | while IFS= read -r file; do
           dir=$(dirname "$file")
           name=$(basename "$dir")
-          helmfile -f "$file" template > "./manifests/crds/rendered/${name}-rendered-all.yaml"
+          {{.HELMFILE_CMD}} helmfile -f "$file" template > "./manifests/crds/rendered/${name}-rendered-all.yaml"
         done
 
   deploy:
